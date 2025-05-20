@@ -6,56 +6,74 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardContent}
-  from "@/components/ui/card";
-import { Button } from './ui/button'; 
-import { Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue, } from '@/components/ui/select';
+  CardContent,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useCart } from '@/contexts/CartContext'; // Імпортуємо CartContext
+
 const DrinkItem: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const drink = drinks.find((d) => d.id === Number(id));
+  const { addToCart } = useCart(); // Використовуємо CartContext
 
-  const [volume, setVolume] = useState<string>('0.33');
+  const [volume, setVolume] = useState<'0.33' | '0.5' | '1.0'>('0.33');
 
   if (!drink) {
     return <p>Напій не знайдено.</p>;
   }
 
-  const price = drink.volumes[volume];
+  const totalPrice = drink.volumes[volume];
 
-  const addToCart = () => {
-    alert(`Додано до кошика: ${drink.name}, об'єм: ${volume} л, ціна: $${price}`);
+  const handleAddToCart = () => {
+    const newItem = {
+      id: drink.id,
+      name: drink.name,
+      volume,
+      price: totalPrice,
+    };
+
+    addToCart(newItem); // Додаємо товар до кошика
+    alert(`Додано до кошика: ${drink.name}, ціна: $${totalPrice}`);
     navigate('/');
   };
 
   return (
-    <div className="p-4">
-      <Card className="transition-transform hover:scale-[1.02] hover:bg-gray-50 cursor-pointer">
+    <div className="p-4 max-w-md mx-auto">
+      <Card className="transition-transform hover:scale-[1.02] cursor-pointer bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm">
         <CardHeader>
-          <CardTitle>{drink.name}</CardTitle>
+          <CardTitle className="text-xl font-bold">{drink.name}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
+          
+          {/* Вибір об'єму */}
           <div>
-            <h3 className="font-semibold">Об'єм:</h3>
-            <Select value={volume} onValueChange={(value) => setVolume(value)}>
-              <SelectTrigger>
+            <h3 className="font-semibold text-sm text-gray-700 dark:text-gray-200">Об'єм:</h3>
+            <Select value={volume} onValueChange={(value) => setVolume(value as any)}>
+              <SelectTrigger className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md">
                 <SelectValue placeholder="Виберіть об'єм" />
               </SelectTrigger>
-              <SelectContent>
-                {Object.keys(drink.volumes).map((v) => (
-                  <SelectItem key={v} value={v}>
-                    {v} л - ${drink.volumes[v]}
+              <SelectContent className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md">
+                {Object.entries(drink.volumes).map(([vol, price]) => (
+                  <SelectItem key={vol} value={vol}>
+                    {vol} л (${price})
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
-          <p>Ціна: ${price}</p>
-          <Button onClick={addToCart} className="w-full">
+
+          {/* Загальна ціна */}
+          <p className="text-lg font-semibold text-primary dark:text-primary">
+            Загальна ціна: ${totalPrice}
+          </p>
+
+          {/* Кнопка "Додати до кошика" */}
+          <Button
+            onClick={handleAddToCart}
+            className="w-full bg-primary text-white hover:bg-primary-dark transition-colors duration-300 rounded-md py-2"
+          >
             Додати до кошика
           </Button>
         </CardContent>

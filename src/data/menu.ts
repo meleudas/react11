@@ -1,39 +1,177 @@
-// src/data/menu.ts
-export interface Pizza {
-  id: number;
-  name: string;
-  description: string;
-  sizes: { small: number; medium: number; large: number };
-  doughOptions: { traditional: number; thin: number };
-  toppings: { [key: string]: number }; // Додаткові інгредієнти
-}
+import type { Pizza, Drink } from '@/types/menu';
 
-export interface Drink {
-  id: number;
-  name: string;
-  volumes: { [key: string]: number }; // Об'єми та ціни
-}
 
 export const pizzas: Pizza[] = [
   {
     id: 1,
-    name: 'Пеппероні',
-    description: 'Сир, пеппероні, томатний соус',
-    sizes: { small: 10, medium: 15, large: 20 },
+    name: 'Маргарита',
+    description: 'Традиційна піца з томатним соусом, моцарелою та свіжим базиліком.',
+    sizes: { small: 9, medium: 14, large: 18 },
     doughOptions: { traditional: 0, thin: 1 },
-    toppings: { cheese: 2, mushrooms: 1.5, sausage: 3 },
+    toppings: { cheese: 2, basil: 0.5, tomatoes: 0.5 },
   },
   {
     id: 2,
-    name: 'Маргарита',
-    description: 'Сир, базилік, томатний соус',
+    name: 'Пеппероні',
+    description: 'Сир, пеппероні, томатний соус — класика жанру.',
+    sizes: { small: 10, medium: 15, large: 20 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { cheese: 2, sausage: 3, mushrooms: 1.5 },
+  },
+  {
+    id: 3,
+    name: 'Гавайська',
+    description: 'Куряче філе, ананас, сир, томатний соус.',
+    sizes: { small: 11, medium: 16, large: 21 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { chicken: 3, pineapple: 1.5 },
+  },
+  {
+    id: 4,
+    name: 'Вегетеріанська',
+    description: 'Сир, помідори, перець, гриби, оливки.',
+    sizes: { small: 10, medium: 15, large: 19 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { cheese: 2, peppers: 1, olives: 1, onions: 1 },
+  },
+  {
+    id: 5,
+    name: 'Чотири сезона',
+    description: 'Різноманітність смаків: шинка, морепродукти, гриби, помідори.',
+    sizes: { small: 12, medium: 17, large: 22 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { ham: 2, seafood: 3, mushrooms: 1.5, tomatoes: 0.5 },
+  },
+  {
+    id: 6,
+    name: 'Капрі',
+    description: 'Сир, помідори, м’ята, оливкова олія.',
     sizes: { small: 9, medium: 14, large: 18 },
     doughOptions: { traditional: 0, thin: 1 },
-    toppings: { cheese: 2, mushrooms: 1.5, sausage: 3 },
+    toppings: { cheese: 2, tomatoes: 0.5, mint: 0.5 },
+  },
+  {
+    id: 7,
+    name: 'Фунгі',
+    description: 'Сир, гриби, шпинат, часник.',
+    sizes: { small: 10, medium: 15, large: 19 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { spinach: 1, garlic: 0.5 },
+  },
+  {
+    id: 8,
+    name: 'Барбекю',
+    description: 'Сир, м’ясо на барбекю, червоний лук, спеції.',
+    sizes: { small: 12, medium: 16, large: 21 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { meat: 3, onion: 0.5 },
+  },
+  {
+    id: 9,
+    name: 'Салямі',
+    description: 'Сир, салямі, оливки, червоний лук.',
+    sizes: { small: 11, medium: 15, large: 20 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { salami: 2, onion: 0.5, olives: 1 },
+  },
+  {
+    id: 10,
+    name: 'Мексиканська',
+    description: 'Сир, ковбаски, перчик чилі, коріандр.',
+    sizes: { small: 11, medium: 16, large: 21 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { sausage: 3, chili: 0.5, coriander: 0.5 },
+  },
+  {
+    id: 11,
+    name: 'Діабло',
+    description: 'Сир, пеппероні, гострий перець, оливкова олія.',
+    sizes: { small: 12, medium: 16, large: 22 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { pepperoni: 3, chili: 0.5, oliveOil: 0.5 },
+  },
+  {
+    id: 12,
+    name: 'Олівер',
+    description: 'Сир, яловичина, оливки, червоний лук.',
+    sizes: { small: 12, medium: 16, large: 22 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { beef: 3, olives: 1, onion: 0.5 },
+  },
+  {
+    id: 13,
+    name: 'Четирі формагі',
+    description: 'Сир, моцарела, пармезан, горгонзола, голубий сир.',
+    sizes: { small: 14, medium: 18, large: 24 },
+    doughOptions: { traditional: 0, thin: 1 },
+    toppings: { mozzarella: 2, parmesan: 2, gorgonzola: 2, blueCheese: 2 },
   },
 ];
 
 export const drinks: Drink[] = [
-  { id: 1, name: 'Кола', volumes: { '0.33': 2, '0.5': 3, '1': 5 } },
-  { id: 2, name: 'Сік', volumes: { '0.33': 3, '0.5': 4, '1': 6 } },
+  {
+    id: 1,
+    name: 'Кола',
+    volumes: { '0.33': 2, '0.5': 3, '1': 5 },
+  },
+  {
+    id: 2,
+    name: 'Спрайт',
+    volumes: { '0.33': 2, '0.5': 3, '1': 5 },
+  },
+  {
+    id: 3,
+    name: 'Фанта',
+    volumes: { '0.33': 2, '0.5': 3, '1': 5 },
+  },
+  {
+    id: 4,
+    name: 'Лимонад',
+    volumes: { '0.33': 3, '0.5': 4, '1': 6 },
+  },
+  {
+    id: 5,
+    name: 'Чай холодний',
+    volumes: { '0.33': 3, '0.5': 4, '1': 6 },
+  },
+  {
+    id: 6,
+    name: 'Мінеральна вода',
+    volumes: { '0.33': 2.5, '0.5': 3.5, '1': 5 },
+  },
+  {
+    id: 7,
+    name: 'Апельсиновий сік',
+    volumes: { '0.33': 3, '0.5': 4, '1': 6 },
+  },
+  {
+    id: 8,
+    name: 'Яблучний сік',
+    volumes: { '0.33': 3, '0.5': 4, '1': 6 },
+  },
+  {
+    id: 9,
+    name: 'Енергетичний напій',
+    volumes: { '0.33': 3, '0.5': 4, '1': 6 },
+  },
+  {
+    id: 10,
+    name: 'Чай гарячий',
+    volumes: { '0.33': 2, '0.5': 3, '1': 4 },
+  },
+  {
+    id: 11,
+    name: 'Кава',
+    volumes: { '0.33': 2, '0.5': 3, '1': 4 },
+  },
+  {
+    id: 12,
+    name: 'Молочний коктейль',
+    volumes: { '0.33': 3, '0.5': 4, '1': 6 },
+  },
+  {
+    id: 13,
+    name: 'Лимонна вода',
+    volumes: { '0.33': 3, '0.5': 4, '1': 6 },
+  },
 ];
