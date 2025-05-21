@@ -1,4 +1,3 @@
-// src/contexts/CartContext.tsx
 import React, { createContext, useState, useContext, type ReactNode } from "react";
 
 interface CartItem {
@@ -28,7 +27,6 @@ export const useCart = () => {
   return context;
 };
 
-// 🔧 Тип пропсів для CartProvider
 interface CartProviderProps {
   children: ReactNode;
 }

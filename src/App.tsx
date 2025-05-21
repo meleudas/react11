@@ -8,7 +8,7 @@ import PizzaItem from './components/PizzaItem';
 import DrinkItem from './components/DrinkItem';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
-import { ThemeProvider } from 'next-themes'; // Імпорт ThemeProvider
+import { ThemeProvider } from 'next-themes'; 
 import Footer from './components/Footer';
 import { CartProvider } from './contexts/CartContext';
 

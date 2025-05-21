@@ -1,4 +1,3 @@
-// src/components/DrinkItem.tsx
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { drinks } from '../data/menu';
@@ -10,13 +9,13 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCart } from '@/contexts/CartContext'; // Імпортуємо CartContext
+import { useCart } from '@/contexts/CartContext'; 
 
 const DrinkItem: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const drink = drinks.find((d) => d.id === Number(id));
-  const { addToCart } = useCart(); // Використовуємо CartContext
+  const { addToCart } = useCart(); 
 
   const [volume, setVolume] = useState<'0.33' | '0.5' | '1.0'>('0.33');
 
@@ -34,8 +33,7 @@ const DrinkItem: React.FC = () => {
       price: totalPrice,
     };
 
-    addToCart(newItem); // Додаємо товар до кошика
-    alert(`Додано до кошика: ${drink.name}, ціна: $${totalPrice}`);
+    addToCart(newItem); 
     navigate('/');
   };
 
@@ -47,7 +45,6 @@ const DrinkItem: React.FC = () => {
         </CardHeader>
         <CardContent className="space-y-6">
           
-          {/* Вибір об'єму */}
           <div>
             <h3 className="font-semibold text-sm text-gray-700 dark:text-gray-200">Об'єм:</h3>
             <Select value={volume} onValueChange={(value) => setVolume(value as any)}>
@@ -64,12 +61,11 @@ const DrinkItem: React.FC = () => {
             </Select>
           </div>
 
-          {/* Загальна ціна */}
           <p className="text-lg font-semibold text-primary dark:text-primary">
             Загальна ціна: ${totalPrice}
           </p>
 
-          {/* Кнопка "Додати до кошика" */}
+
           <Button
             onClick={handleAddToCart}
             className="w-full bg-primary text-white hover:bg-primary-dark transition-colors duration-300 rounded-md py-2"

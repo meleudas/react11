@@ -1,6 +1,5 @@
-// src/components/ui/Image.tsx
 import React from 'react';
-import { motion } from 'framer-motion'; // Для анімацій
+import { motion } from 'framer-motion'; 
 
 interface ImageProps {
   className?: string;
@@ -18,7 +17,6 @@ const Image: React.FC<ImageProps> = ({ className }) => {
       }}
       className={`relative bg-gray-300 ${className}`}
     >
-      {/* Сірий фон */}
       <div className="w-full h-full" />
     </motion.div>
   );

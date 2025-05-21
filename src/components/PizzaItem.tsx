@@ -22,13 +22,13 @@ import {
 } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { useCart } from '@/contexts/CartContext'; // Імпортуємо CartContext
+import { useCart } from '@/contexts/CartContext'; 
 
 const PizzaItem: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const pizza = pizzas.find((p) => p.id === Number(id));
-  const { addToCart } = useCart(); // Використовуємо CartContext
+  const { addToCart } = useCart(); 
 
   const [size, setSize] = useState<'small' | 'medium' | 'large'>('small');
   const [dough, setDough] = useState<'traditional' | 'thin'>('traditional');
@@ -53,8 +53,7 @@ const PizzaItem: React.FC = () => {
       price: totalPrice,
     };
 
-    addToCart(newItem); // Додаємо товар до кошика
-    alert(`Додано до кошика: ${pizza.name}, ціна: $${totalPrice}`);
+    addToCart(newItem); 
     navigate('/');
   };
 
@@ -65,10 +64,8 @@ const PizzaItem: React.FC = () => {
           <CardTitle className="text-xl font-bold">{pizza.name}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Опис */}
           <p className="text-gray-600 dark:text-gray-300">{pizza.description}</p>
 
-          {/* Вибір розміру */}
           <div>
             <h3 className="font-semibold text-sm text-gray-700 dark:text-gray-200">Розмір:</h3>
             <Select value={size} onValueChange={(value) => setSize(value as any)}>
@@ -89,7 +86,6 @@ const PizzaItem: React.FC = () => {
             </Select>
           </div>
 
-          {/* Вибір типу тіста */}
           <div>
             <h3 className="font-semibold text-sm text-gray-700 dark:text-gray-200">Тісто:</h3>
             <RadioGroup
@@ -120,7 +116,6 @@ const PizzaItem: React.FC = () => {
             </RadioGroup>
           </div>
 
-          {/* Додаткові інгредієнти */}
           <div>
             <h3 className="font-semibold text-sm text-gray-700 dark:text-gray-200">
               Додаткові інгредієнти:
@@ -143,12 +138,10 @@ const PizzaItem: React.FC = () => {
             ))}
           </div>
 
-          {/* Загальна ціна */}
           <p className="text-lg font-semibold text-primary dark:text-primary">
             Загальна ціна: ${totalPrice}
           </p>
 
-          {/* Кнопка "Додати до кошика" */}
           <Button
             onClick={handleAddToCart}
             className="w-full bg-primary text-white hover:bg-primary-dark transition-colors duration-300 rounded-md py-2"

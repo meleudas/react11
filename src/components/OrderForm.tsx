@@ -1,15 +1,15 @@
-// src/components/OrderForm.tsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button'; // ShadCN UI
-import { Input } from '@/components/ui/input'; // ShadCN UI
-import { Textarea } from '@/components/ui/textarea'; // ShadCN UI
-import { useCart } from '@/contexts/CartContext'; // Імпортуємо CartContext
-import { toast } from 'sonner'; // Імпортуємо Sonner
+import { Button } from '@/components/ui/button'; 
+import { Input } from '@/components/ui/input'; 
+import { Textarea } from '@/components/ui/textarea'; 
+import { useCart } from '@/contexts/CartContext'; 
+import { toast } from 'sonner'; 
 
 const OrderForm: React.FC = () => {
   const navigate = useNavigate();
-  const { cart, clearCart } = useCart(); // Отримуємо дані кошика
+  const { cart, clearCart } = useCart(); 
 
   const [formData, setFormData] = useState({
     name: '',
@@ -28,7 +28,6 @@ const OrderForm: React.FC = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Очищаємо помилки при введенні
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
@@ -64,10 +63,9 @@ const OrderForm: React.FC = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      return; // Якщо валідація не пройдена, завершуємо функцію
+      return; 
     }
 
-    // Зберегти замовлення у localStorage
     const orders = JSON.parse(localStorage.getItem('orders') || '[]');
     const newOrder = {
       items: cart,
@@ -77,23 +75,20 @@ const OrderForm: React.FC = () => {
     };
     localStorage.setItem('orders', JSON.stringify([...orders, newOrder]));
 
-    // Показати повідомлення про успішне оформлення
     toast.success('Замовлення успішно оформлено!', {
       description: `Дякуємо, ${formData.name}! Очікуйте доставку.`,
     });
 
-    clearCart(); // Очистити кошик
-    navigate('/'); // Перейти на головну сторінку
+    clearCart(); 
+    navigate('/'); 
   };
 
   const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
     <div className="p-4 space-y-6 max-w-md mx-auto">
-      {/* Заголовок */}
       <h1 className="text-2xl font-bold text-center">Оформлення замовлення</h1>
 
-      {/* Інформація про замовлення */}
       <div className="space-y-2">
         <h2 className="font-semibold">Ваше замовлення:</h2>
         {cart.length === 0 ? (
@@ -113,9 +108,7 @@ const OrderForm: React.FC = () => {
         </p>
       </div>
 
-      {/* Форма */}
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Ім'я */}
         <Input
           type="text"
           placeholder="Ваше ім'я"
@@ -129,7 +122,6 @@ const OrderForm: React.FC = () => {
         />
         {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
 
-        {/* Телефон */}
         <Input
           type="tel"
           placeholder="Номер телефону"
@@ -143,7 +135,6 @@ const OrderForm: React.FC = () => {
         />
         {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
 
-        {/* Адреса */}
         <Input
           type="text"
           placeholder="Адреса доставки"
@@ -159,7 +150,6 @@ const OrderForm: React.FC = () => {
           <p className="text-red-500 text-sm">{errors.address}</p>
         )}
 
-        {/* Коментар */}
         <Textarea
           placeholder="Додатковий коментар (необов'язково)"
           name="comment"
@@ -168,7 +158,6 @@ const OrderForm: React.FC = () => {
           className="w-full"
         />
 
-        {/* Кнопка підтвердження */}
         <Button
           type="submit"
           className="w-full bg-primary text-white hover:bg-primary-dark transition-colors duration-300 rounded-md py-2"

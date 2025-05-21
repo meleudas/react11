@@ -1,14 +1,13 @@
-// src/components/Cart.tsx
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { useCart } from '@/contexts/CartContext'; // Імпортуємо CartContext
-import { useNavigate } from 'react-router-dom'; // Імпортуємо useNavigate
+import { useCart } from '@/contexts/CartContext'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const Cart: React.FC = () => {
-  const { cart, removeFromCart, clearCart } = useCart(); // Отримуємо дані з CartContext
-  const navigate = useNavigate(); // Використовуємо useNavigate для переходу
+  const { cart, removeFromCart, clearCart } = useCart(); 
+  const navigate = useNavigate(); 
 
-  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0); // Розраховуємо загальну суму
+  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0); 
 
   const handleCheckout = () => {
     if (cart.length === 0) {
@@ -16,7 +15,6 @@ const Cart: React.FC = () => {
       return;
     }
 
-    // Переходимо на сторінку оформлення замовлення
     navigate('/order');
   };
 
